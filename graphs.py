@@ -2,7 +2,6 @@
 
 import numpy as np
 import pandas as pd
-import csv
 import seaborn as sns
 import matplotlib.pyplot as plt
 from datetime import datetime
@@ -16,7 +15,6 @@ def filter_time(time):
 
 def zip_code_dispatch():
     data_frame = pd.read_csv('./data/sfpd_filtered.csv')
-
     # gets all the zip_code codes from the data and sorts them
     all_zips = data_frame.zipcode_of_incident
     zip_codes = []
@@ -48,20 +46,48 @@ def zip_code_dispatch():
                 incidents_in_zip_code += 1
         average_dispatch_times.append(total_time_difference/incidents_in_zip_code)
 
-    # generate the graph
-    plt.figure(figsize=(14, 6))
+    # generate the bar graph
+    plt.figure(figsize=(18, 10))
     sns.set_style('whitegrid')
     sns.barplot(x=sorted_zips, y=average_dispatch_times)
     plt.ylabel("Average To Dispatch Units (s)")
     plt.xlabel("Zip Code of Incident")
     plt.savefig("static/images/zipcodebarplot.png", format="png", transparent=True)
 
+
 def battalion_usage():
-    
+    data_frame = pd.read_csv('./data/sfpd_filtered.csv')
+    # gets all the battalions from the data
+    all_units = data_frame.battalion
+    battalions = []
+    for unit in all_units:
+        if not battalions.__contains__(unit):
+            battalions.append(unit)
+        else:
+            continue
+    battalions = sorted(battalions)
+
+    # creates list that corresponds to the battalions, and represents the total number of calls for each battalion
+    battalion_calls = []
+    for i in range(0,11):
+        responses = 0
+        for j in range(0, 10000):
+            if battalions[i] == all_units[j]:
+                responses += 1
+        battalion_calls.append(responses)
+
+    # creates the bar graph
+    plt.figure(figsize=(16, 9))
+    sns.set_style("whitegrid")
+    sns.barplot(x=battalions, y=battalion_calls)
+    plt.xlabel("Battalion Number")
+    plt.ylabel("Total Battalion Responses")
+    plt.savefig("./static/images/battalionbarplot.png", format="png", transparent=True)
 
 
 def main():
     zip_code_dispatch()
+    battalion_usage()
 
 
 if __name__ == '__main__':
