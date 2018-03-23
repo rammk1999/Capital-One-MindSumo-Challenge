@@ -10,4 +10,4 @@ create the actual graphs as .png files.
 ## Web Development
 In order to set up the web page to display all the graphs and models, I used
 Flask and then utilized BootStrap to create a simple template. From here
-I deployed the live web site using Heroku. 
+I deployed the live web site using Heroku.

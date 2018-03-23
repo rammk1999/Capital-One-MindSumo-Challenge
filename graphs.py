@@ -5,7 +5,6 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from datetime import datetime
-from matplotlib.colors import ListedColormap
 
 
 def filter_time(time):
@@ -48,10 +47,12 @@ def zip_code_dispatch():
 
     # generate the bar graph
     plt.figure(figsize=(18, 10))
-    sns.set_style('whitegrid')
+    sns.set_style('dark')
+    sns.set_style('ticks')
     sns.barplot(x=sorted_zips, y=average_dispatch_times)
     plt.ylabel("Average To Dispatch Units (s)")
     plt.xlabel("Zip Code of Incident")
+    plt.tight_layout()
     plt.savefig("static/images/zipcodebarplot.png", format="png", transparent=True)
 
 
@@ -78,10 +79,12 @@ def battalion_usage():
 
     # creates the bar graph
     plt.figure(figsize=(16, 9))
-    sns.set_style("whitegrid")
+    sns.set_style("dark")
+    sns.set_style("ticks")
     sns.barplot(x=battalions, y=battalion_calls)
     plt.xlabel("Battalion Number")
     plt.ylabel("Total Battalion Responses")
+    plt.tight_layout()
     plt.savefig("./static/images/battalionbarplot.png", format="png", transparent=True)
 
 
@@ -91,15 +94,52 @@ def unit_spread():
     # create a facet plot with various scatter plots to show the spread of all the unit types
     coordinates = data_frame.loc[:, ['latitude', 'longitude', 'unit_type']]
     figure = sns.FacetGrid(data=coordinates, hue='unit_type', col='unit_type', col_wrap=3, sharey=True, sharex=True, size=4)
-    figure.map(plt.scatter, 'latitude', 'longitude', alpha=0.35)
+    figure.map(plt.scatter, 'longitude', 'latitude', alpha=0.35)
+    plt.tight_layout()
     plt.savefig("./static/images/unitspread.png", format="png")
 
 
+def heat_map():
+    data_frame = pd.read_csv('./data/sfpd_filtered.csv')
+
+    # create a new column to represent the danger-level of a crime
+    final_priorities = data_frame.final_priority
+    call_type_groups = data_frame.call_type_group
+    alarms = data_frame.number_of_alarms
+    danger_levels = []
+
+    # assigns an arbitrary "danger level" based on the severity of the call and what units were dispatched
+    def assign_danger_level(final_priority, call_type_group, number_of_alarms):
+
+        if call_type_group == "Non Life-threatening":
+            call_danger_level = 1
+        elif call_type_group == "Alarm":
+            call_danger_level = 2
+        elif call_type_group == "Fire":
+            call_danger_level = 3
+        elif call_type_group == "Potential Life-Threatening":
+            call_danger_level = 4
+        else:
+            call_danger_level = 0
+
+        return call_danger_level + final_priority + number_of_alarms
+
+    for i in range(0, 10000):
+        danger_levels.append(assign_danger_level(final_priorities[i], call_type_groups[i], alarms[i]))
+
+    # creates the heat plot
+    plt.figure(figsize=(16, 16))
+    data_frame['danger_level'] = pd.Series(data=danger_levels)
+    data_frame.plot.hexbin(x="longitude", y="latitude", C="danger_level", reduce_C_function=np.sum, gridsize=40)
+    plt.tight_layout()
+    plt.savefig("./static/images/dangerheatmap.png", format="png")
+
 
 def main():
-    zip_code_dispatch()
+    # zip_code_dispatch()
     battalion_usage()
-    unit_spread()
+    # unit_spread()
+    # heat_map()
 
 
 if __name__ == '__main__':
