@@ -97,8 +97,8 @@ def unit_spread():
 
 
 def main():
-    # zip_code_dispatch()
-    # battalion_usage()
+    zip_code_dispatch()
+    battalion_usage()
     unit_spread()
 
 
