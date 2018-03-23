@@ -1,4 +1,4 @@
-# Contains all the code to make all the visuals for the webpage
+# Contains all the code to make all the visuals for the web page
 
 import numpy as np
 import pandas as pd
@@ -53,7 +53,7 @@ def zip_code_dispatch():
     plt.ylabel("Average To Dispatch Units (s)")
     plt.xlabel("Zip Code of Incident")
     plt.tight_layout()
-    plt.savefig("static/images/zipcodebarplot.png", format="png", transparent=True)
+    plt.savefig("static/img/graphs/zipcodebarplot.png", format="png")
 
 
 def battalion_usage():
@@ -85,7 +85,19 @@ def battalion_usage():
     plt.xlabel("Battalion Number")
     plt.ylabel("Total Battalion Responses")
     plt.tight_layout()
-    plt.savefig("./static/images/battalionbarplot.png", format="png", transparent=True)
+    plt.savefig("./static/img/graphs/battalionbarplot.png", format="png")
+
+
+def battalion_spread():
+    data_frame = pd.read_csv('./data/sfpd_filtered.csv')
+
+    # create a facet plot with various scatter plots to show the calls where each battalion responded to
+    coordinates = data_frame.loc[:, ['latitude', 'longitude', 'battalion']]
+    facet_plot = sns.FacetGrid(data=coordinates, hue='battalion', col='battalion', col_wrap=3, sharex=True,
+                               sharey=True, size=4)
+    facet_plot.map(plt.scatter, 'longitude', 'latitude', alpha=0.35)
+    plt.tight_layout()
+    plt.savefig("./static/img/graphs/battalionspread.png", format="png")
 
 
 def unit_spread():
@@ -93,10 +105,11 @@ def unit_spread():
 
     # create a facet plot with various scatter plots to show the spread of all the unit types
     coordinates = data_frame.loc[:, ['latitude', 'longitude', 'unit_type']]
-    figure = sns.FacetGrid(data=coordinates, hue='unit_type', col='unit_type', col_wrap=3, sharey=True, sharex=True, size=4)
+    figure = sns.FacetGrid(data=coordinates, hue='unit_type', col='unit_type', col_wrap=3, sharex=True,
+                           sharey=True, size=4)
     figure.map(plt.scatter, 'longitude', 'latitude', alpha=0.35)
     plt.tight_layout()
-    plt.savefig("./static/images/unitspread.png", format="png")
+    plt.savefig("./static/img/graphs/unitspread.png", format="png")
 
 
 def heat_map():
@@ -132,14 +145,15 @@ def heat_map():
     data_frame['danger_level'] = pd.Series(data=danger_levels)
     data_frame.plot.hexbin(x="longitude", y="latitude", C="danger_level", reduce_C_function=np.sum, gridsize=40)
     plt.tight_layout()
-    plt.savefig("./static/images/dangerheatmap.png", format="png")
+    plt.savefig("./static/img/graphs/dangerheatmap.png", format="png")
 
 
 def main():
-    # zip_code_dispatch()
+    zip_code_dispatch()
     battalion_usage()
-    # unit_spread()
-    # heat_map()
+    battalion_spread()
+    unit_spread()
+    heat_map()
 
 
 if __name__ == '__main__':
