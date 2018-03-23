@@ -87,27 +87,18 @@ def battalion_usage():
 
 def unit_spread():
     data_frame = pd.read_csv('./data/sfpd_filtered.csv')
-    # take all the columns that show times
-    timestamps = []
-    for col in data_frame.columns:
-        if "timestamp" in col:
-            timestamps.append(col)
-
-    # the columns in the data set are changed from timestamp to datetime objects
-    for col in timestamps:
-        data_frame[col] = pd.to_datetime(data_frame[col][:-4])
 
     # create a facet plot with various scatter plots to show the spread of all the unit types
     coordinates = data_frame.loc[:, ['latitude', 'longitude', 'unit_type']]
-    figure = sns.FacetGrid(data=coordinates, hue='unit_type', col='unit_type', col_wrap=3, size=4)
+    figure = sns.FacetGrid(data=coordinates, hue='unit_type', col='unit_type', col_wrap=3, sharey=True, sharex=True, size=4)
     figure.map(plt.scatter, 'latitude', 'longitude', alpha=0.35)
     plt.savefig("./static/images/unitspread.png", format="png")
 
 
 
 def main():
-    zip_code_dispatch()
-    battalion_usage()
+    # zip_code_dispatch()
+    # battalion_usage()
     unit_spread()
 
 
