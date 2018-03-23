@@ -41,7 +41,7 @@ def zip_code_dispatch():
         total_time_difference = 0
         for j in range(0, 10000):
             if sorted_zips[i] == all_zips[j]:
-                time_difference = dispatch_times[i] - received_times[i]
+                time_difference = dispatch_times[j] - received_times[j]
                 total_time_difference += time_difference.total_seconds()
                 incidents_in_zip_code += 1
         average_dispatch_times.append(total_time_difference/incidents_in_zip_code)
@@ -85,9 +85,30 @@ def battalion_usage():
     plt.savefig("./static/images/battalionbarplot.png", format="png", transparent=True)
 
 
+def unit_spread():
+    data_frame = pd.read_csv('./data/sfpd_filtered.csv')
+    # take all the columns that show times
+    timestamps = []
+    for col in data_frame.columns:
+        if "timestamp" in col:
+            timestamps.append(col)
+
+    # the columns in the data set are changed from timestamp to datetime objects
+    for col in timestamps:
+        data_frame[col] = pd.to_datetime(data_frame[col][:-4])
+
+    # create a facet plot with various scatter plots to show the spread of all the unit types
+    coordinates = data_frame.loc[:, ['latitude', 'longitude', 'unit_type']]
+    figure = sns.FacetGrid(data=coordinates, hue='unit_type', col='unit_type', col_wrap=3, size=4)
+    figure.map(plt.scatter, 'latitude', 'longitude', alpha=0.35)
+    plt.savefig("./static/images/unitspread.png", format="png")
+
+
+
 def main():
     zip_code_dispatch()
     battalion_usage()
+    unit_spread()
 
 
 if __name__ == '__main__':
