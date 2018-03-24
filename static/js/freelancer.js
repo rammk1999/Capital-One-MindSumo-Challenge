@@ -50,13 +50,13 @@
   $(window).scroll(navbarCollapse);
 
   // Modal popup$(function () {
-  $('.background images-item').magnificPopup({
+  $('.portfolio-item').magnificPopup({
     type: 'inline',
     preloader: false,
     focus: '#username',
     modal: true
   });
-  $(document).on('click', '.background images-modal-dismiss', function(e) {
+  $(document).on('click', '.portfolio-modal-dismiss', function(e) {
     e.preventDefault();
     $.magnificPopup.close();
   });
