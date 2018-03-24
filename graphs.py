@@ -49,6 +49,7 @@ def zip_code_dispatch():
     plt.figure(figsize=(18, 10))
     sns.set_style('dark')
     sns.set_style('ticks')
+    sns.set(font_scale=1.5)
     sns.barplot(x=sorted_zips, y=average_dispatch_times)
     plt.ylabel("Average To Dispatch Units (s)")
     plt.xlabel("Zip Code of Incident")
@@ -81,6 +82,7 @@ def battalion_usage():
     plt.figure(figsize=(16, 9))
     sns.set_style("dark")
     sns.set_style("ticks")
+    sns.set(font_scale=2)
     sns.barplot(x=battalions, y=battalion_calls)
     plt.xlabel("Battalion Number")
     plt.ylabel("Total Battalion Responses")
@@ -96,6 +98,7 @@ def battalion_spread():
     facet_plot = sns.FacetGrid(data=coordinates, hue='battalion', col='battalion', col_wrap=3, sharex=True,
                                sharey=True, size=4)
     facet_plot.map(plt.scatter, 'longitude', 'latitude', alpha=0.35)
+    sns.set(font_scale=1.15)
     plt.tight_layout()
     plt.savefig("./static/img/graphs/battalionspread.png", format="png")
 
