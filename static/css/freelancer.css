@@ -323,7 +323,7 @@ form .row:first-child .floating-label-form-group {
 .footer {
   padding-top: 5rem;
   padding-bottom: 5rem;
-  background-color: #ff761e;
+  background-color: #ad571d;
   color: #fff;
 }
 
@@ -378,4 +378,3 @@ a:focus, a:hover, a:active {
   background-color: #804017;
   border-color: #804017;
 }
-

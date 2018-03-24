@@ -98,7 +98,7 @@ def battalion_spread():
     facet_plot = sns.FacetGrid(data=coordinates, hue='battalion', col='battalion', col_wrap=3, sharex=True,
                                sharey=True, size=4)
     facet_plot.map(plt.scatter, 'longitude', 'latitude', alpha=0.35)
-    sns.set(font_scale=1.15)
+    sns.set(font_scale=1.2)
     plt.tight_layout()
     plt.savefig("./static/img/graphs/battalionspread.png", format="png")
 
@@ -146,7 +146,7 @@ def heat_map():
     # creates the heat plot
     plt.figure(figsize=(16, 16))
     data_frame['danger_level'] = pd.Series(data=danger_levels)
-    data_frame.plot.hexbin(x="longitude", y="latitude", C="danger_level", reduce_C_function=np.sum, gridsize=40)
+    data_frame.plot.hexbin(x="longitude", y="latitude", C="danger_level", reduce_C_function=np.sum, gridsize=75)
     plt.tight_layout()
     plt.savefig("./static/img/graphs/dangerheatmap.png", format="png")
 

@@ -3,7 +3,11 @@
 
   <head>
 
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <title>S.F.P.D. Data Analysis</title>
+    <link rel="icon"
+          type="img/png"
+          href="/static/img/background%20images/logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -22,7 +26,7 @@
     <link href="/static/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
-    <link href="/static/css/freelancer.css" rel="stylesheet">
+    <link href="/static/style/style.css" rel="stylesheet">
 
   </head>
 
@@ -144,17 +148,11 @@
         <hr class="star-light mb-5">
         <div class="row">
           <div class="col-lg-4 ml-auto">
-            <p class="lead">Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
+            <p class="lead">BOI</p>
           </div>
           <div class="col-lg-4 mr-auto">
-            <p class="lead">Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
+            <p class="lead">BOI</p>
           </div>
-        </div>
-        <div class="text-center mt-4">
-          <a class="btn btn-xl btn-outline-light" href="#">
-            <i class="fa fa-download mr-2"></i>
-            Download Now!
-          </a>
         </div>
       </div>
     </section>
@@ -220,14 +218,13 @@
           <div class="col-md-4">
             <h4 class="text-uppercase mb-4">Resources</h4>
             <p class="lead mb-0">This web page made use of:
-                <br> Flask, BootStrap, Pandas, Seaborn, MatPlotLib, and Heroku </br>
-                <br> All relevant code can be found at https://github.com/rammk1999/Capital-One-MindSumo-Challenge </br>
+                <br> Flask, BootStrap, Pandas, Seaborn, MatPlotLib, and Heroku
+                <br> All relevant code can be found at https://github.com/rammk1999/Capital-One-MindSumo-Challenge
             </p>
           </div>
           <div class="col-md-4">
             <h4 class="text-uppercase mb-4">About Freelancer</h4>
-            <p class="lead mb-0">Freelance is a free to use, open source Bootstrap theme created by
-              <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+            <p class="lead mb-0">Freelance is a free to use, open source Bootstrap theme created by Start Bootstrap</p>
           </div>
         </div>
       </div>
@@ -251,13 +248,18 @@
         <div class="container text-center">
           <div class="row">
             <div class="col-lg-8 mx-auto">
-              <h2 class="text-secondary text-uppercase mb-0">ZIP CODE BAR PLOT</h2>
+              <h2 class="text-secondary text-uppercase mb-0">Average Dispatch Time</h2>
               <hr class="star-dark mb-5">
               <img class="img-fluid mb-5" src="/static/img/graphs/zipcodebarplot.png" alt="">
-              <p class="mb-5">ZIP CODE BAR PLOT DESCRIPTION</p>
+              <p class="mb-5">This graph shows the average dispatch time for each zip code. That is, the average amount
+              of time from when an operator receives a phone call until they can dispatch a free unit (in seconds). Most
+              of the zip codes are pretty consistent, taking about 180 seconds to receive a call and dispatch a police
+              unit. But in zip codes 94105 and 94127 the average times to dispatch units are so much higher than the rest
+              of the zip codes, taking over 1500 seconds in both instances (25 minutes). In order to further flush out
+              why this might be happening, I looked at the total number of calls each battalion took.</p>
               <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
                 <i class="fa fa-close"></i>
-                EXIT GRAPH</a>
+                Exit Graph</a>
             </div>
           </div>
         </div>
@@ -273,13 +275,17 @@
         <div class="container text-center">
           <div class="row">
             <div class="col-lg-8 mx-auto">
-              <h2 class="text-secondary text-uppercase mb-0">BATTALION BAR PLOT</h2>
+              <h2 class="text-secondary text-uppercase mb-0">Total Calls per Battalion</h2>
               <hr class="star-dark mb-5">
               <img class="img-fluid mb-5" src="/static/img/graphs/battalionbarplot.png" alt="">
-              <p class="mb-5">BATTALION BAR PLOT DESCRIPTION</p>
+              <p class="mb-5">This graph shows the the total number of calls each battalion took over the twelve day
+              period. Most battalions responded to about 750 calls over the twelve day  period. Battalion B99 seems like
+                it is a special unit, so let's disregard it. Battalions B02 and B03 each took close to 1750 calls,
+                approximately 1000 more calls than most other battalions. Now that the most used battalions are
+                highlighted, let's look at where these battalions operate inside San Francisco. </p>
               <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
                 <i class="fa fa-close"></i>
-                EXIT GRAPH</a>
+                Exit Graph</a>
             </div>
           </div>
         </div>
@@ -295,13 +301,25 @@
         <div class="container text-center">
           <div class="row">
             <div class="col-lg-8 mx-auto">
-              <h2 class="text-secondary text-uppercase mb-0">BATTALION SPREAD</h2>
+              <h2 class="text-secondary text-uppercase mb-0">Battalion Spread</h2>
               <hr class="star-dark mb-5">
               <img class="img-fluid mb-5" src="/static/img/graphs/battalionspread.png" alt="">
-              <p class="mb-5">BATTALION SPREAD DESCRIPTION</p>
+              <p class="mb-5">This graph shows all the calls each battalion received as dots on a scatter plot consisting
+              of the latitude and longitude of each call. Looking at the zip codes of the longest dispatch times, the battalions
+              with the most use, and the coordinates where each battalion operates, there are two revelations. The first
+              is that 94105 seems to have long dispatch times because there is a lot of activity in that area, and maybe
+              the battalions don't have enough man power to respond to every call promptly. This area is also closer to
+              downtown so it is very crowded. These two things coupled together can explain the high dispatch times.
+              The second revelation is much more interesting. 94127 is usually assigned to battalion B08, which takes
+              a fairly average amount of calls. So why the extraordinarily long dispatch time? After doing some further
+              research, I discovered that there are 3 police stations in the area. The Taraval and Ingleside stations plus
+              the SFO Police Academy. The only thing I can infer is that none of the stations are responsible for 94127
+                exclusively and there may be confusion on how to handle calls from this zip code. The obvious solution
+                seems to be to either give a station full control of the area of create a new, smaller station just
+                for this zip code.</p>
               <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
                 <i class="fa fa-close"></i>
-                EXIT GRAPH</a>
+                Exit Graph</a>
             </div>
           </div>
         </div>
@@ -317,13 +335,18 @@
         <div class="container text-center">
           <div class="row">
             <div class="col-lg-8 mx-auto">
-              <h2 class="text-secondary text-uppercase mb-0">UNIT SPREAD</h2>
+              <h2 class="text-secondary text-uppercase mb-0">Unit Spread</h2>
               <hr class="star-dark mb-5">
               <img class="img-fluid mb-5" src="/static/img/graphs/unitspread.png" alt="">
-              <p class="mb-5">UNIT SPREAD DESCRIPTION.</p>
+              <p class="mb-5">This graph is similar to the battalion spread, however each scatter plot in this facet grid
+              represents the various unit types that the S.F.P.D sends out. By showing the distribution of each unit type,
+              this scatter plot simultaneously where the most calls come from. Additionally, depending on the type of unit,
+              there is also a way to determine where certain types of crimes occur. For example, the distribution of
+              rescue squads most likely shows were very severe incidents, most likely involving hostages occur. Several other
+              similar assumptions can be made from this graph.</p>
               <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
                 <i class="fa fa-close"></i>
-                EXIT GRAPH</a>
+                Exit Graph</a>
             </div>
           </div>
         </div>
@@ -339,10 +362,17 @@
         <div class="container text-center">
           <div class="row">
             <div class="col-lg-8 mx-auto">
-              <h2 class="text-secondary text-uppercase mb-0">DANGER HEAT MAP</h2>
+              <h2 class="text-secondary text-uppercase mb-0">Danger Heat Map</h2>
               <hr class="star-dark mb-5">
               <img class="img-fluid mb-5" src="/static/img/graphs/dangerheatmap.png" alt="">
-              <p class="mb-5">DANGER HEAT MAP DESCRIPTION</p>
+              <p class="mb-5">To further reinforce the assumptions that can be made from the graph of unit distributions,
+              I created a heat map to show how dangerous different areas are in the city. There is no simple way to quantify
+              how dangerous a situation is, so I made some simple assumptions to help aid me in identifying how "dangerous"
+              a certain 911 call ended up being. For each call, I plotted the coordinates and then assigned the call a "danger"
+              value. This value was calculated by taking the final call priority (either 2 or 3), the call type group
+              (Non-Life Threatening = 1, Alarm = 2, Fire = 3, Potentially Life Threatening = 4), and the number of alarms
+              set off by the call. Each area then is assigned a danger level based on the total danger of each call in that
+              zone. The darker the zone, the more dangerous it is. </p>
               <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
                 <i class="fa fa-close"></i>
                 Exit Graph</a>
@@ -361,10 +391,10 @@
         <div class="container text-center">
           <div class="row">
             <div class="col-lg-8 mx-auto">
-              <h2 class="text-secondary text-uppercase mb-0">MAP OF SAN FRANCISCO</h2>
+              <h2 class="text-secondary text-uppercase mb-0">San Francisco</h2>
               <hr class="star-dark mb-5">
               <img class="img-fluid mb-5" src="/static/img/background%20images/sfozipcodesmap.png" alt="">
-              <p class="mb-5">MAP DESCRIPTION</p>
+              <p class="mb-5">Based on the other graphs, parts of this map are highlighted to summarize those findings.</p>
               <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
                 <i class="fa fa-close"></i>
                 Exit Graph</a>
