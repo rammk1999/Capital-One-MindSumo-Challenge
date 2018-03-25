@@ -5,16 +5,10 @@ from sklearn.neighbors import KNeighborsRegressor
 import time
 import  datetime
 
-# class InputData:
-#     def __init__(self, latitude, longitude, timestamp):
-#         self.latitude = latitude
-#         self.longitude = longitude
-#         self.time_in_seconds = time.strptime(timestamp, "%H:%M:%S")
-
 
 # finish the prediction algorithm here
 class DispatchUnitPredictor:
-    def __init__(self, data="./data/sfpd_filtered_for_predictions.csv", neighbors=1, verified=False):
+    def __init__(self, data="./data/sfpd_filtered_for_predictions.csv", neighbors=1):
         self.data_frame = pd.read_csv(data)
         self.neighbors = neighbors
         self.x_columns = self._get_x_cols(self.data_frame)
@@ -24,7 +18,8 @@ class DispatchUnitPredictor:
     @staticmethod
     def _get_x_cols(df):
         all_cols = list(df)
-        x_cols = all_cols[:-1]
+        x_cols = all_cols[:-2]
+        print(x_cols)
         return x_cols
 
 
@@ -32,30 +27,23 @@ class DispatchUnitPredictor:
     def _get_y_cols(df):
         all_cols = list(df)
         y_cols = all_cols[-1:]
+        print(y_cols)
         return y_cols
 
 
     def predict_dispatch(self, user_latitude, user_longitude, user_time):
-        knn = KNeighborsRegressor(n_neighbors=self.neighbors, weights="distance", algorithm="auto")
-        train_x = [self.x_columns]
-        print(train_x)
-        train_y = [self.y_columns]
-        print(train_y)
-        print("About to fit the model")
+        train_x = pd.read_csv(filepath_or_buffer="./data/sfpd_filtered_for_predictions.csv", usecols=self.x_columns)
+        train_y = pd.read_csv(filepath_or_buffer="./data/sfpd_filtered_for_predictions.csv", usecols=self.y_columns)
+        knn = KNeighborsRegressor(n_neighbors=self.neighbors)
         knn.fit(train_x, train_y)
-        print("Fit the model")
         input_time = time.strptime(user_time, "%H:%M:%S")
         input_time = datetime.timedelta(hours=input_time.tm_hour, minutes=input_time.tm_min,
                                         seconds=input_time.tm_sec).total_seconds()
-        print(input_time)
-        print("Converted the data")
-        test_x = [[input_time, user_latitude, user_longitude]]
-        print(test_x)
+        test_x = [[float(input_time), float(user_latitude), float(user_longitude)]]
         prediction = knn.predict(test_x)
-        print("Predicted the answer")
         return prediction
 
 
 if __name__ == '__main__':
     test = DispatchUnitPredictor()
-    test.predict_dispatch(37.7744, -122.5046, "17:36:16")
+    test.predict_dispatch(37.7552, -122.4755, "2:04:21")
