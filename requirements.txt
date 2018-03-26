@@ -52,3 +52,4 @@ XlsxWriter==0.9.3
 zope.interface==4.2.0
 pandas==0.22.0
 sklearn==0.0
+scipy==1.0.0
