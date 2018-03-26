@@ -48,10 +48,10 @@
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Data Visualizations</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">Summary</a>
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">Prediction Description</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Dispatch Prediction</a>
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Most Likely Dispatch</a>
             </li>
           </ul>
         </div>
@@ -144,16 +144,20 @@
     <!-- About Section -->
     <section class="bg-primary text-white mb-0" id="about">
       <div class="container">
-        <h2 class="text-center text-uppercase text-white">Summary</h2>
+        <h2 class="text-center text-uppercase text-white">Description of Prediction Model</h2>
         <hr class="star-light mb-5">
         <div class="row">
           <div class="col-lg-4 ml-auto">
-            <p class="lead">The portion below allows you to input a Latitude, Longitude, and a military time (HH:MM:SS)
-            which will simulate a phone 911 phone call taking place at that time and place.</p>
+            <p class="lead">The portion below allows you to input a latitude, longitude, and military time (HH:MM:SS)
+            to simulate a 911 phone call taking place. Normally during an emergency call, the dispatch operator expects
+              to receive an address, but they can also receive a caller's GPS location.
+            The input coordinates are restricted to only be within the city of San Francisco.</p>
           </div>
           <div class="col-lg-4 mr-auto">
-            <p class="lead">Based on the inputted values, the web site predicts what is the unit that is most likely to
-            be dispatched. This predication model utilizes a K-Nearest Neighbor classification method.</p>
+            <p class="lead">This prediction model utilizes a K-Nearest Neighbor classification method.
+              I assigned each type of unit a numerical value to represent how likely it is to come.
+              Medics and Engines are assigned higher numbers than Investigation units because they are in action more often.
+              I made these assumptions based on the number of points I saw in the unit spread graph.</p>
           </div>
         </div>
       </div>
@@ -170,8 +174,9 @@
               <div class="input text">
                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
                   <label>Latitude (Four Decimal Places)</label>
-                  <input name = "latitude" class = "form-control" id = "latitude" type = "text"
-                         placeholder = "Latitude (Four Decimal Places)" required = "required"
+                  <input name = "latitude" class = "form-control" id = "latitude" type = "number"
+                         step= "0.00000001" min= "37.7000" max = "37.8400"
+                         placeholder = "Latitude (range: 37.70 to 37.84)" required = "required"
                          data-validation-required-message="Please enter latitude.">
                   <p class="help-block text-danger"></p>
                 </div>
@@ -179,8 +184,9 @@
               <div class="input text">
                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
                   <label>Longitude (Four Decimal Places)</label>
-                  <input name = "longitude" class = "form-control" id = "Longitude" type = "text"
-                         placeholder = "Longitude (Four Decimal Places)" required = "required"
+                  <input name = "longitude" class = "form-control" id = "Longitude" type = "number"
+                         step = "0.0000001" min= "-122.5250" max= "-122.3500"
+                         placeholder = "Longitude (range = -122.525 to -122.350)" required = "required"
                          data-validation-required-message="Please enter longitude.">
                   <p class="help-block text-danger"></p>
                 </div>
