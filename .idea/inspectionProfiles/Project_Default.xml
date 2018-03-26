@@ -14,7 +14,7 @@
     <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredPackages">
         <value>
-          <list size="104">
+          <list size="105">
             <item index="0" class="java.lang.String" itemvalue="python-3.6.14" />
             <item index="1" class="java.lang.String" itemvalue="python-3.6" />
             <item index="2" class="java.lang.String" itemvalue="functools32" />
@@ -119,6 +119,7 @@
             <item index="101" class="java.lang.String" itemvalue="packaging" />
             <item index="102" class="java.lang.String" itemvalue="jmespath" />
             <item index="103" class="java.lang.String" itemvalue="lazy-object-proxy" />
+            <item index="104" class="java.lang.String" itemvalue="virutalenv-clone" />
           </list>
         </value>
       </option>
