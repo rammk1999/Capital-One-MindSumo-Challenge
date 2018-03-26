@@ -27,17 +27,20 @@ def predict_dispatch():
             classifier = predictor.DispatchUnitPredictor()
             dispatch_code = classifier.predict_dispatch(user_latitude=float(input_lat),
                                                         user_longitude=float(input_long), user_time=user_time)
-            units = ["MEDIC", "ENGINE", "PRIVATE", "TRUCK", "CHIEF",
-                     "RESCUE CAPTAIN", "RESCUE SQUAD", "SUPPORT", "INVESTIGATION"]
-            most_likely_dispatch = ""
-            for dispatch in units:
-                if dispatch == int(round(dispatch_code)):
-                    most_likely_dispatch = dispatch
+            print(dispatch_code)
+            unit_codes = (1, 2, 3, 4, 5, 6, 7, 8, 9)
+            units = ("INVESTIGATION", "SUPPORT", "RESCUE SQUAD", "RESCUE CAPTAIN", "CHIEF", "TRUCK",
+                     "PRIVATE", "ENGINE", "MEDIC")
+            most_likely_dispatch = "unit"
+            for code in unit_codes:
+                if code == int(round(dispatch_code)):
+                    print(code)
+                    most_likely_dispatch = units[code - 1]
 
-            response="Most likely dispatch :" + most_likely_dispatch
+            response = "Dispatch: " + most_likely_dispatch
 
         except ValueError:
-            response = "Time was inputted incorrectly, re-enter your input"
+            response = "Incorrect time. Re-input your data"
 
     return render_template('index.html', response=response)
 

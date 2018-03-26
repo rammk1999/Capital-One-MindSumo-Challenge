@@ -51,7 +51,7 @@ def zip_code_dispatch():
     sns.set_style('ticks')
     sns.set(font_scale=1.5)
     sns.barplot(x=sorted_zips, y=average_dispatch_times)
-    plt.ylabel("Average To Dispatch Units (s)")
+    plt.ylabel("Average To Dispatch Units (sec)")
     plt.xlabel("Zip Code of Incident")
     plt.tight_layout()
     plt.savefig("static/img/graphs/zipcodebarplot.png", format="png")
@@ -85,7 +85,7 @@ def battalion_usage():
     sns.set(font_scale=2)
     sns.barplot(x=battalions, y=battalion_calls)
     plt.xlabel("Battalion Number")
-    plt.ylabel("Total Battalion Responses")
+    plt.ylabel("Total Number of Battalion Responses")
     plt.tight_layout()
     plt.savefig("./static/img/graphs/battalionbarplot.png", format="png")
 
@@ -151,7 +151,7 @@ def heat_map():
     plt.savefig("./static/img/graphs/dangerheatmap.png", format="png")
 
 
-def main():
+def generate_graphs():
     zip_code_dispatch()
     battalion_usage()
     battalion_spread()
@@ -160,4 +160,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    generate_graphs()

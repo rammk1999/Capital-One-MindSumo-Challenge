@@ -35,7 +35,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Capital One Mind-Sumo</a>
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Mind-Sumo Challenge</a>
         <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded"
                 type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -67,7 +67,7 @@
         <h2 class="font-weight-light mb-0">This web page displays my analysis and findings from a data set representing
         a twelve day stretch of all the 911 calls received by the San Francisco Police Department. From this data I generated
         5 graphs that show various trends in the dispatches of all S.F.P.D forces. In addition, there is a dispatch
-        prediction model. </h2>
+        prediction model. This project was done as the final stage of a Capital One Software Summit Application</h2>
       </div>
     </header>
 
@@ -84,7 +84,7 @@
                   <i class="fa fa-search-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="img-fluid" src="/static/img/graphs/zipcodebarplot.png" alt="">
+              <img class="img-fluid" src="/static/img/previews/zipcodebarplotpreview.png" alt="">
             </a>
           </div>
           <div class="col-md-6 col-lg-4">
@@ -94,7 +94,7 @@
                   <i class="fa fa-search-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="img-fluid" src="/static/img/graphs/battalionbarplot.png" alt="">
+              <img class="img-fluid" src="/static/img/previews/battalionbarplotpreview.png" alt="">
             </a>
           </div>
           <div class="col-md-6 col-lg-4">
@@ -104,7 +104,7 @@
                   <i class="fa fa-search-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="img-fluid" src="/static/img/graphs/battalionspreadpreview.png" alt="">
+              <img class="img-fluid" src="/static/img/previews/battalionspreadpreview.png" alt="">
             </a>
           </div>
           <div class="col-md-6 col-lg-4">
@@ -124,7 +124,7 @@
                   <i class="fa fa-search-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="img-fluid" src="/static/img/graphs/dangerheatmap.png" alt="">
+              <img class="img-fluid" src="/static/img/previews/dangerheatmappreview.png" alt="">
             </a>
           </div>
           <div class="col-md-6 col-lg-4">
@@ -149,15 +149,17 @@
         <div class="row">
           <div class="col-lg-4 ml-auto">
             <p class="lead">The portion below allows you to input a latitude, longitude, and military time (HH:MM:SS)
-            to simulate a 911 phone call taking place. Normally during an emergency call, the dispatch operator expects
+            to simulate a 911 phone call taking place. Normally, during an emergency call, the dispatch operator expects
               to receive an address, but they can also receive a caller's GPS location.
-            The input coordinates are restricted to only be within the city of San Francisco.</p>
+            The input coordinates are restricted to only be within the city of San Francisco.
+            This prediction model utilizes a K-Nearest Neighbor classification method.</p>
           </div>
           <div class="col-lg-4 mr-auto">
-            <p class="lead">This prediction model utilizes a K-Nearest Neighbor classification method.
+            <p class="lead">
               I assigned each type of unit a numerical value to represent how likely it is to come.
-              Medics and Engines are assigned higher numbers than Investigation units because they are in action more often.
-              I made these assumptions based on the number of points I saw in the unit spread graph.</p>
+              medics and engines are assigned higher numbers than investigation units because they are in action more often.
+              Adding these numeric values helps weight the different types of units that are present in the data.
+              I made these assumptions based on the density of points I saw in the unit spread graph.</p>
           </div>
         </div>
       </div>
@@ -224,7 +226,8 @@
             <h4 class="text-uppercase mb-4">Resources</h4>
             <p class="lead mb-0">This web page made use of:
                 <br> Flask, BootStrap, Pandas, Seaborn, MatPlotLib, and Heroku
-                <br> All relevant code can be found at https://github.com/rammk1999/Capital-One-MindSumo-Challenge
+                <br> Relevant Code:
+              <br>https://github.com/rammk1999/Capital-One-MindSumo-Challenge
             </p>
           </div>
           <div class="col-md-4">
@@ -320,7 +323,7 @@
               research, I discovered that there are 3 police stations in the area. The Taraval and Ingleside stations plus
               the SFO Police Academy. The only thing I can infer is that none of the stations are responsible for 94127
                 exclusively and there may be confusion on how to handle calls from this zip code. The obvious solution
-                seems to be to either give a station full control of the area of create a new, smaller station just
+                seems to be to give one station full control of the area. Or create a new, smaller station just
                 for this zip code.</p>
               <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
                 <i class="fa fa-close"></i>
@@ -343,11 +346,11 @@
               <h2 class="text-secondary text-uppercase mb-0">Unit Spread</h2>
               <hr class="star-dark mb-5">
               <img class="img-fluid mb-5" src="/static/img/graphs/unitspread.png" alt="">
-              <p class="mb-5">This graph is similar to the battalion spread, however each scatter plot in this facet grid
+              <p class="mb-5">This graph is similar to the battalion spread, however, each scatter plot in this facet grid
               represents the various unit types that the S.F.P.D sends out. By showing the distribution of each unit type,
               this scatter plot simultaneously shows where the most calls come from. Additionally, depending on the type of unit,
               there is also a way to determine where certain types of crimes occur. For example, the distribution of
-              rescue squads most likely shows were very severe incidents, most likely involving hostages, occur. Several other
+              rescue squads most likely shows where very severe incidents, most likely involving hostages, occur. Several other
               similar assumptions can be made from this graph.</p>
               <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
                 <i class="fa fa-close"></i>
@@ -371,7 +374,7 @@
               <hr class="star-dark mb-5">
               <img class="img-fluid mb-5" src="/static/img/graphs/dangerheatmap.png" alt="">
               <p class="mb-5">To further reinforce the assumptions that can be made from the graph of unit distributions,
-              I created a heat map to show how dangerous different areas are in the city. There is no simple way to quantify
+              I created a heat map to show how dangerous different areas are, in the city. There is no simple way to quantify
               how dangerous a situation is, so I made some assumptions to help aid me in identifying how "dangerous"
               a certain 911 call ended up being. For each call, I plotted the coordinates and then assigned the call a "danger"
               value. This value was calculated by taking the final call priority (either 2 or 3), the call type group
