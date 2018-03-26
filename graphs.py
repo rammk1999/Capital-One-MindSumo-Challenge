@@ -7,14 +7,18 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 
+# filters timestamps from the data set
 def filter_time(time):
     datetime_format = "%Y-%m-%d %H:%M:%S.%f"
     return datetime.strptime(time[:-4], datetime_format)
 
 
+# creates a bar graph of the average dispatch times for each zip code
 def zip_code_dispatch():
+    # modified the data to get rid of columns that I didn't use, then read from this new data set
     data_frame = pd.read_csv('./data/sfpd_filtered.csv')
-    # gets all the zip_code codes from the data and sorts them
+
+    # gets all the zip codes from the data and sorts them
     all_zips = data_frame.zipcode_of_incident
     zip_codes = []
     for codes in all_zips:
@@ -54,9 +58,11 @@ def zip_code_dispatch():
     plt.ylabel("Average To Dispatch Units (sec)")
     plt.xlabel("Zip Code of Incident")
     plt.tight_layout()
+    # the graphs aren't generated in real time, but are images that are deployed on the website
     plt.savefig("static/img/graphs/zipcodebarplot.png", format="png")
 
 
+# creates another bar graph of the total number of calls each battalion was assigned
 def battalion_usage():
     data_frame = pd.read_csv('./data/sfpd_filtered.csv')
     # gets all the battalions from the data
@@ -90,6 +96,7 @@ def battalion_usage():
     plt.savefig("./static/img/graphs/battalionbarplot.png", format="png")
 
 
+# creates a group of scatter plots that show the approximate regions
 def battalion_spread():
     data_frame = pd.read_csv('./data/sfpd_filtered.csv')
 
@@ -103,6 +110,7 @@ def battalion_spread():
     plt.savefig("./static/img/graphs/battalionspread.png", format="png")
 
 
+# creates another group of scatter plots that show the distributions of all the unit types
 def unit_spread():
     data_frame = pd.read_csv('./data/sfpd_filtered.csv')
 
@@ -115,6 +123,7 @@ def unit_spread():
     plt.savefig("./static/img/graphs/unitspread.png", format="png")
 
 
+# creates a heat plot that represents the danger level in a region
 def heat_map():
     data_frame = pd.read_csv('./data/sfpd_filtered.csv')
 
@@ -151,6 +160,7 @@ def heat_map():
     plt.savefig("./static/img/graphs/dangerheatmap.png", format="png")
 
 
+# generates all the images
 def generate_graphs():
     zip_code_dispatch()
     battalion_usage()
